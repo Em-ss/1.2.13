@@ -1,4 +1,4 @@
-import TasksFilter from './task-filte';
+import TasksFilter from './task-filte'
 
 function Footer({ filter, onFilterChange, deleteAll, value }) {
   return (
