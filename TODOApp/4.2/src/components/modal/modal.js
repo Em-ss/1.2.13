@@ -1,25 +1,49 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 import './modal.css';
 
-export const Modal = ({ active }) => {
+export const Modal = ({ active, onDelete, onModal }) => {
+  console.log(active);
+  // useEffect(() => {}, active);
   return (
-    <div className="modal" onClick={() => {}}>
-      <div className={active ? 'modal-content modal-active' : 'modal-content'} onClick={(e) => e.stopPropagation()}>
-        <p>Are you sure to delete this article?</p>
-        <button>No</button>
-        <button>Yes</button>
+    <div
+      className={active ? 'modal active' : 'modal'}
+      onClick={() => {
+        onModal();
+      }}
+    >
+      <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+        <p className="modal-label">Are you sure to delete this article?</p>
+        <button
+          className="modal-btn"
+          onClick={() => {
+            onModal();
+          }}
+        >
+          No
+        </button>
+        <Link to={'/'}>
+          <button
+            className="modal-btn"
+            onClick={() => {
+              // onModal();
+              onDelete();
+            }}
+          >
+            Yes
+          </button>
+        </Link>
       </div>
     </div>
   );
 };
-const mapStateToProps = (state) => {
-  return {
-    modal: state.modal,
-  };
-};
-const mapDispatchToProps = (dispatch) => {
-  return {};
-};
-export default connect(mapStateToProps, mapDispatchToProps)(Modal);
+// const mapStateToProps = (state) => {
+//   return {
+//     modal: state.modal,
+//   };
+// };
+// const mapDispatchToProps = (dispatch) => {
+//   return {};
+// };
+// export default connect(mapStateToProps, mapDispatchToProps)(Modal);

@@ -9,3 +9,4 @@ export const EDIT_ART = 'EDIT_ART';
 export const CHECK = 'CHECK';
 export const EDIT_ARTICLE = 'EDIT_ARTICLE';
 export const MODAL = 'MODAL';
+export const ERROR = 'ERROR';

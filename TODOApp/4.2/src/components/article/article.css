@@ -158,7 +158,32 @@ position: absolute;
 
 .del {
     right: 81px;
+    border: 1px solid #F5222D;
+border-radius: 5px;
+
+/* font-family: 'Inter UI'; */
+font-size: 14px;
+line-height: 22px;
+padding-left: 10px;
+padding-right: 10px;
+padding-top: 5px;
+padding-bottom: 5px;
+background-color:white;
+color: #F5222D;
 }
 .edit {
     right: 30px;
+    border: 1px solid #52C41A;
+border-radius: 5px;
+background-color:white;
+/* font-family: 'Inter UI'; */
+font-size: 14px;
+line-height: 22px;
+padding-left: 10px;
+padding-right: 10px;
+padding-top: 5px;
+padding-bottom: 5px;
+
+color: #52C41A;
+
 }

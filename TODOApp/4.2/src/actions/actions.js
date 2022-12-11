@@ -1,6 +1,6 @@
 export const check = () => ({ type: 'CHECK', payload: false });
 export const edit = (check) => ({ type: 'EDIT_ART', payload: check });
-export const modal = (check) => ({ type: 'MODAL', payload: !check });
+export const modal = (check) => ({ type: 'MODAL', payload: check });
 
 export const auth = () => {
   return async (dispatch) => {
@@ -51,7 +51,7 @@ export const getArticlesSlug = (id) => {
         dispatch({
           type: 'LOAD_ARTICLE',
           payload2: dat,
-          loading: true,
+          loading2: true,
           getSlug: id,
         });
       });
@@ -111,6 +111,10 @@ export const LoginPOST = (data) => {
       .then((response) => {
         console.log(response);
         if (!response.ok) {
+          dispatch({
+            type: 'ERROR',
+            payload: true,
+          });
           throw new Error('Vse ploxo');
         }
         // console.log(response.json());
@@ -126,6 +130,7 @@ export const LoginPOST = (data) => {
           type: 'LOGIN',
           payload: dat,
           auth: true,
+          error: false,
         });
       });
   };

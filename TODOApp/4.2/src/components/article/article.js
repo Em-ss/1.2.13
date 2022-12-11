@@ -6,12 +6,12 @@ import ReactMarkdown from 'react-markdown';
 const { Paragraph } = Typography;
 
 import * as actions from '../../actions/actions';
-import { getArticlesSlug, edit, Deleterticle, modal } from '../../actions/actions';
+import { getArticlesSlug, edit, Deleterticle, modal, getArticles } from '../../actions/actions';
 import { Modal } from '../../components/modal/modal.js';
 import 'antd/dist/antd.css';
 import './article.css';
 
-const Article = ({ article, getArt, EditART, deleterticle, slug, auth, modal, Modal }) => {
+const Article = ({ article, getArt, EditART, deleterticle, slug, auth, modalF, ModalF, tickets, offset, page }) => {
   const { id } = useParams();
   useEffect(() => {
     console.log('new');
@@ -29,15 +29,16 @@ const Article = ({ article, getArt, EditART, deleterticle, slug, auth, modal, Mo
   };
 
   const onModal = () => {
-    Modal();
+    ModalF(!modalF);
   };
-
+  console.log(modalF);
   const onDelete = () => {
     deleterticle(token, slug);
+    tickets(offset, page);
   };
   return (
     <>
-      <Modal active={modal} delete={onDelete}></Modal>
+      <Modal active={modalF} onDelete={onDelete} onModal={onModal}></Modal>
       <div className="aricle-list">
         <div className="aricle-list-box">
           <div className="aricle-list-box-title">
@@ -54,12 +55,12 @@ const Article = ({ article, getArt, EditART, deleterticle, slug, auth, modal, Mo
           <div className="aricle-list-box-info">
             <span>{<ReactMarkdown>{article.description}</ReactMarkdown>}</span>
             {auth ? (
-              <Link to={'/'}>
-                <button className="article-btn del" onClick={onModal}>
-                  Delete
-                </button>
-              </Link>
-            ) : null}
+              // <Link to={'/'}>
+              <button className="article-btn del" onClick={onModal}>
+                Delete
+              </button>
+            ) : // </Link>
+            null}
             {auth ? (
               <Link to={`/articles/${id}/edit`}>
                 <button className="article-btn edit" onClick={onEdit}>
@@ -95,7 +96,8 @@ const mapStateToProps = (state) => {
     page: state.getPage,
     slug: state.slug,
     auth: state.auth,
-    modal: state.modal,
+    modalF: state.modal,
+    offset: state.offset,
   };
 };
 const mapDispatchToProps = (dispatch) => {
@@ -103,7 +105,8 @@ const mapDispatchToProps = (dispatch) => {
     getArt: (id) => dispatch(getArticlesSlug(id)),
     EditART: (id) => dispatch(edit(id)),
     deleterticle: (token, slug) => dispatch(Deleterticle(token, slug)),
-    Modal: () => dispatch(modal()),
+    ModalF: (check) => dispatch(modal(check)),
+    tickets: (offset, page) => dispatch(getArticles(offset, page)),
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Article);

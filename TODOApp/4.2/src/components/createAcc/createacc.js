@@ -10,7 +10,7 @@ import 'antd/dist/antd.css';
 import './createacc.css';
 
 export const CreateAcc = ({ Auth, check, token, AuthPOST, Check }) => {
-  const password = useRef({});
+  // const Password = useRef({});
   const {
     register,
     handleSubmit,
@@ -19,7 +19,9 @@ export const CreateAcc = ({ Auth, check, token, AuthPOST, Check }) => {
     control,
     watch,
   } = useForm();
-  password.current = watch('password', '');
+
+  // Password.current = watch('Password', '');
+  const val = watch();
   check;
   if (check) {
     Check(false);
@@ -33,7 +35,7 @@ export const CreateAcc = ({ Auth, check, token, AuthPOST, Check }) => {
       <form
         className="auth-form"
         onSubmit={handleSubmit((data) => {
-          // console.log(data);
+          console.log(data);
           // console.log(AuthPOST);
           Auth(data);
         })}
@@ -65,7 +67,8 @@ export const CreateAcc = ({ Auth, check, token, AuthPOST, Check }) => {
         <input
           className="auth-info"
           type="password"
-          ref={register('Password', {
+          // name="Password"
+          {...register('Password', {
             required: 'This is required',
             minLength: { value: 6, message: 'Your password needs to be at least 6 characters.' },
             maxLength: { value: 40, message: 'Your password needs to be at more  40 characters.' },
@@ -77,7 +80,8 @@ export const CreateAcc = ({ Auth, check, token, AuthPOST, Check }) => {
         <input
           className="auth-info"
           type="password"
-          ref={register('Repeat', { validate: (value) => value === password.current || 'The passwords do not match' })}
+          // name="Repeat"
+          {...register('Repeat', { validate: (value) => value === val.Password || 'The passwords do not match' })}
           placeholder="Password"
         />
         {errors.Repeat && <p className="auth-info">{errors.Repeat.message}</p>}

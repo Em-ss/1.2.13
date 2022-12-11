@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Pagination } from 'antd';
-import { Link, useParams } from 'react-router-dom';
+import { Navigate, useParams } from 'react-router-dom';
 
 import * as actions from '../../actions/actions';
 import { getArticles, getArticlesSlug } from '../../actions/actions';
@@ -12,7 +12,7 @@ export const AllLists = ({ tickets, ticketss = [], offset, getArt, slug, page })
   useEffect(() => {
     console.log('use');
     tickets(offset, page);
-    getArt(slug);
+    // getArt(slug);
     // console.log(ticketss);
   }, []);
 

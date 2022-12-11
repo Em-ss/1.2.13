@@ -15,7 +15,7 @@ const List = ({ item, getArt, slug }) => {
   let date = new Date(item.createdAt);
   const onChangeArt = () => {
     // console.log(id);
-    // getArt(slug);
+    getArt(slug);
   };
 
   return (

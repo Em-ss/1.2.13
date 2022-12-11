@@ -9,7 +9,7 @@ import * as actions from '../../actions/actions';
 import 'antd/dist/antd.css';
 import './loginacc.css';
 
-export const LoginAcc = ({ Auth, auth, Login, EditART }) => {
+export const LoginAcc = ({ Auth, auth, Login, EditART, error }) => {
   const {
     register,
     handleSubmit,
@@ -51,6 +51,7 @@ export const LoginAcc = ({ Auth, auth, Login, EditART }) => {
         <p className="login-info">{errors['Emailaddres']?.message}</p>
         <label className="login-info">Password</label>
         <input
+          type="password"
           className="login-info"
           {...register('Password', {
             required: 'This is required',
@@ -59,6 +60,7 @@ export const LoginAcc = ({ Auth, auth, Login, EditART }) => {
         />
         <p className="login-info">{errors.Password?.message}</p>
         <input className="login-submit" type="submit" value="Login" />
+        {error ? <p className="login-info">Invalid login or password</p> : null}
       </form>
     </div>
   );
@@ -68,6 +70,7 @@ const mapStateToProps = (state) => {
   return {
     slug: state.slug,
     auth: state.auth,
+    error: state.error,
   };
 };
 
